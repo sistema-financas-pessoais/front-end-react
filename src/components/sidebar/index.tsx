@@ -1,15 +1,17 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import { TypeDataNavigation, principalDataNavigation } from './data';
 import { ListNavigationItem } from './components/ListNavigationItem';
 import { ListCollapsebleItem } from './components/ListCollapsebleItem';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
+import { changeToggleSidebar } from '../../store/reducers/toggleSidebarSlice';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
 
 export const Sidebar = () => {
-  const [open, setOpen] = React.useState(false);
+  const toggleSidebar = useAppSelector((state) => state?.toggleSidebar);
+  const dispatch = useAppDispatch();
 
   const toggleDrawer = (
     event: React.KeyboardEvent | React.MouseEvent | null,
@@ -25,15 +27,14 @@ export const Sidebar = () => {
       }
     }
 
-    setOpen(open);
+    dispatch(changeToggleSidebar(open));
   };
 
   return (
     <>
-      <Button onClick={(event) => toggleDrawer(event, true)}>Open</Button>
       <Drawer
         anchor={'left'}
-        open={open}
+        open={toggleSidebar.value}
         onClose={() => toggleDrawer(null, false)}
       >
         <Box
