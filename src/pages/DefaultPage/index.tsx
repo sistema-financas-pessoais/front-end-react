@@ -7,7 +7,7 @@ export const DefaultPage = () => {
     <>
       <Header />
       <Sidebar />
-      <main className="dark:bg-slate-950 bg-neutral-100">
+      <main className="dark:bg-slate-950 bg-neutral-100 max-w-[1280px] mx-auto p-8 h-full">
         <Outlet />
       </main>
     </>
