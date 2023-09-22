@@ -3,14 +3,10 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { principalDataNavigation } from './dataNavigation';
+import { TypeDataNavigation, principalDataNavigation } from './data';
+import { ListNavigationItem } from './components/ListNavigationItem';
+import { ListCollapsebleItem } from './components/ListCollapsebleItem';
+import WestOutlinedIcon from '@mui/icons-material/WestOutlined';
 
 export const Sidebar = () => {
   const [open, setOpen] = React.useState(false);
@@ -33,46 +29,50 @@ export const Sidebar = () => {
   };
 
   return (
-    <div>
-      <>
-        <Button onClick={(event) => toggleDrawer(event, true)}>left</Button>
-        <Drawer
-          anchor={'left'}
-          open={open}
-          onClose={() => toggleDrawer(null, false)}
+    <>
+      <Button onClick={(event) => toggleDrawer(event, true)}>Open</Button>
+      <Drawer
+        anchor={'left'}
+        open={open}
+        onClose={() => toggleDrawer(null, false)}
+      >
+        <Box
+          className="flex flex-col flex-1 h-full justify-between dark:bg-red-500"
+          sx={{ minWidth: 250 }}
+          role="presentation"
         >
-          <Box
-            sx={{ width: 250 }}
-            role="presentation"
+          <List>
+            {principalDataNavigation.map((dataNavigation) => {
+              if (dataNavigation.type === TypeDataNavigation.DEFAULT) {
+                return (
+                  <ListNavigationItem
+                    key={dataNavigation.title}
+                    icon={dataNavigation.icon}
+                    title={dataNavigation.title}
+                  />
+                );
+              } else if (
+                dataNavigation.type === TypeDataNavigation.COLLAPSEBLE
+              ) {
+                return (
+                  <ListCollapsebleItem
+                    key={dataNavigation.title}
+                    icon={dataNavigation.icon}
+                    title={dataNavigation.title}
+                    children={dataNavigation.children}
+                  />
+                );
+              }
+            })}
+          </List>
+          <button
+            className="sticky  self-end bottom-0 right-0 pr-3 pb-1"
             onClick={(event) => toggleDrawer(event, false)}
-            onKeyDown={(event) => toggleDrawer(event, false)}
           >
-            <List>
-              {principalDataNavigation.map((dataNavigation) => (
-                <ListItem key={dataNavigation.title} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>{dataNavigation.icon}</ListItemIcon>
-                    <ListItemText primary={dataNavigation.title} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-            <Divider />
-            <List>
-              {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-        </Drawer>
-      </>
-    </div>
+            <WestOutlinedIcon />
+          </button>
+        </Box>
+      </Drawer>
+    </>
   );
 };
