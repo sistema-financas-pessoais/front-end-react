@@ -6,7 +6,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
-import { ListItemProp, TypeDataNavigation } from '../../data';
+import { ListItemProp } from '../../data';
 import { ListNavigationItem } from '../ListNavigationItem';
 
 export interface ListCollapsebleItemProps {
@@ -25,24 +25,22 @@ export const ListCollapsebleItem = ({
   return (
     <>
       <ListItemButton onClick={() => setCollapse(!collapse)}>
-        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemIcon className="dark:text-white">{icon}</ListItemIcon>
         <ListItemText>{title}</ListItemText>
         {collapse ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
+
       <Collapse in={collapse} timeout="auto" unmountOnExit>
         <List>
-          {children?.map((dataNavigation) => {
-            if (dataNavigation.type === TypeDataNavigation.DEFAULT) {
-              return (
-                <ListNavigationItem
-                  key={dataNavigation.title}
-                  icon={dataNavigation.icon}
-                  title={dataNavigation.title}
-                  isChild={true}
-                />
-              );
-            }
-          })}
+          {children?.map((dataNavigation) => (
+            <ListNavigationItem
+              className="dark:hover:bg-slate-800 hover:bg-slate-200"
+              key={dataNavigation.title}
+              icon={dataNavigation.icon}
+              title={dataNavigation.title}
+              isChild={true}
+            />
+          ))}
         </List>
       </Collapse>
     </>

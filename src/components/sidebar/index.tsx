@@ -37,7 +37,7 @@ export const Sidebar = () => {
         onClose={() => toggleDrawer(null, false)}
       >
         <Box
-          className="flex flex-col flex-1 h-full justify-between dark:bg-red-500"
+          className="flex flex-col flex-1 h-full justify-between dark:bg-slate-950 bg-neutral-100 dark:text-white text-black dark:border-slate-100 dark:border-1 rounded"
           sx={{ minWidth: 250 }}
           role="presentation"
         >
@@ -46,6 +46,7 @@ export const Sidebar = () => {
               if (dataNavigation.type === TypeDataNavigation.DEFAULT) {
                 return (
                   <ListNavigationItem
+                    className="dark:hover:bg-slate-800 hover:bg-slate-200"
                     key={dataNavigation.title}
                     icon={dataNavigation.icon}
                     title={dataNavigation.title}
@@ -66,10 +67,10 @@ export const Sidebar = () => {
             })}
           </List>
           <button
-            className="sticky  self-end bottom-0 right-0 pr-3 pb-1"
+            className="sticky  self-end bottom-0 right-0 mr-3 mb-1 p-1 dark:hover:bg-slate-800 hover:bg-slate-200 rounded-full"
             onClick={(event) => toggleDrawer(event, false)}
           >
-            <WestOutlinedIcon />
+            <WestOutlinedIcon className="dark:text-white" />
           </button>
         </Box>
       </Drawer>
