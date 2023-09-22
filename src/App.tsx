@@ -1,11 +1,14 @@
 import './App.css';
+import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 
 function App() {
   return (
-    <main className="dark:bg-slate-950 bg-neutral-100">
+    <>
+      <Header />
       <Sidebar />
-    </main>
+      <main className="dark:bg-slate-950 bg-neutral-100"></main>
+    </>
   );
 }
 

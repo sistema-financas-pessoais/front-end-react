@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import { TypeDataNavigation, principalDataNavigation } from './data';
 import { ListNavigationItem } from './components/ListNavigationItem';
 import { ListCollapsebleItem } from './components/ListCollapsebleItem';
-import WestOutlinedIcon from '@mui/icons-material/WestOutlined';
+import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 
 export const Sidebar = () => {
   const [open, setOpen] = React.useState(false);
@@ -37,7 +37,7 @@ export const Sidebar = () => {
         onClose={() => toggleDrawer(null, false)}
       >
         <Box
-          className="flex flex-col flex-1 h-full justify-between dark:bg-slate-950 bg-neutral-100 dark:text-white text-black dark:border-slate-100 dark:border-1 rounded"
+          className="flex flex-col flex-1 h-full justify-between dark:bg-slate-950 bg-neutral-100 dark:text-white text-black dark:border-slate-100 dark:border-1"
           sx={{ minWidth: 250 }}
           role="presentation"
         >
@@ -70,7 +70,7 @@ export const Sidebar = () => {
             className="sticky  self-end bottom-0 right-0 mr-3 mb-1 p-1 dark:hover:bg-slate-800 hover:bg-slate-200 rounded-full"
             onClick={(event) => toggleDrawer(event, false)}
           >
-            <WestOutlinedIcon className="dark:text-white" />
+            <MenuOpenOutlinedIcon className="dark:text-white" />
           </button>
         </Box>
       </Drawer>
