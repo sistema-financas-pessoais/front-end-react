@@ -15,7 +15,7 @@ export const useSwitchTheme = (): useSwitchThemeReturn => {
   return {
     switchTheme: (newTheme: TypeTheme) => {
       const html = document.querySelector('html');
-      const currentTheme = get('theme') as TypeTheme;
+      const currentTheme = get<TypeTheme | null>('theme');
 
       if (newTheme === currentTheme) {
         html?.classList.remove(TypeThemeEnum.LIGHT, TypeThemeEnum.DARK);
@@ -33,7 +33,7 @@ export const useSwitchTheme = (): useSwitchThemeReturn => {
 
 export const useCurrentTheme = (): TypeTheme => {
   const { get } = useLocalStorage();
-  const currentTheme = get('theme') as TypeTheme;
+  const currentTheme = get<TypeTheme | null>('theme');
   const html = document.querySelector('html');
   const theme = currentTheme ? currentTheme : TypeThemeEnum.LIGHT;
   html?.classList.remove(TypeThemeEnum.LIGHT, TypeThemeEnum.DARK);

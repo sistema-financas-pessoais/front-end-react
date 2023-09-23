@@ -1,7 +1,7 @@
 import { encryptStorage } from '../../config/storage';
 
 interface UseLocalStorageReturn {
-  get: (key: string) => unknown | undefined;
+  get: <T>(key: string) => T;
   set: <T>(key: string, value: T) => void;
   remove: (key: string) => void;
 }
