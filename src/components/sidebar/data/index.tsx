@@ -11,6 +11,7 @@ export interface ListItemProp {
   link: string;
   icon: React.ReactNode;
   type: TypeDataNavigation;
+  onClick?: React.MouseEventHandler<HTMLLIElement> | undefined;
   children?: Omit<ListItemProp, 'children'>[];
 }
 

@@ -38,6 +38,7 @@ export const ListCollapsebleItem = ({
               key={dataNavigation.title}
               icon={dataNavigation.icon}
               title={dataNavigation.title}
+              onClick={dataNavigation.onClick}
               isChild={true}
             />
           ))}

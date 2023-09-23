@@ -3,7 +3,6 @@ import { Header } from '../../components/Header';
 import { Sidebar } from '../../components/sidebar';
 
 export const DefaultPage = () => {
-
   return (
     <>
       <Header />

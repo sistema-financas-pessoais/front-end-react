@@ -6,8 +6,9 @@ import ListItemText from '@mui/material/ListItemText';
 export interface ListNavigationItemProps {
   title: string;
   icon: React.ReactNode;
+  className?: string;
   isChild?: boolean;
-  className: string;
+  onClick?: React.MouseEventHandler<HTMLLIElement> | undefined;
 }
 
 export const ListNavigationItem = ({
@@ -15,9 +16,10 @@ export const ListNavigationItem = ({
   title,
   isChild = false,
   className,
+  onClick,
 }: ListNavigationItemProps) => {
   return (
-    <ListItem disablePadding className={className}>
+    <ListItem onClick={onClick} disablePadding className={className}>
       <ListItemButton sx={isChild ? { pl: 4 } : {}}>
         <ListItemIcon className="dark:text-white">{icon}</ListItemIcon>
         <ListItemText primary={title} />

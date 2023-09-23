@@ -10,7 +10,7 @@ export const useLocalStorage = (): UseLocalStorageReturn => {
   return {
     get: (key: string) => {
       const data = encryptStorage.getItem(key);
-      return JSON.parse(data);
+      return data;
     },
     set: <T>(key: string, value: T) =>
       encryptStorage.setItem(key, JSON.stringify(value)),
