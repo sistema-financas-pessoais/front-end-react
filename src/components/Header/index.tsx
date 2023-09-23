@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { changeToggleSidebar } from '../../store/reducers/toggleSidebarSlice';
+import { changeToggleSidebar } from '../../store/reducers';
 import Button from '@mui/material/Button';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import SettingsMenu from '../SettingsMenu';

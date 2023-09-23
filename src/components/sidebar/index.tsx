@@ -6,7 +6,7 @@ import { TypeDataNavigation, principalDataNavigation } from './data';
 import { ListNavigationItem } from './components/ListNavigationItem';
 import { ListCollapsebleItem } from './components/ListCollapsebleItem';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
-import { changeToggleSidebar } from '../../store/reducers/toggleSidebarSlice';
+import { changeToggleSidebar } from '../../store/reducers';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 
 export const Sidebar = () => {
