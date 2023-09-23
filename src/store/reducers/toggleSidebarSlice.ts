@@ -9,7 +9,7 @@ const initialState: ToggleSidebarState = {
 };
 
 const toggleSidebarSlice = createSlice({
-  name: 'toggle-sidebar',
+  name: 'token',
   initialState,
   reducers: {
     changeToggleSidebar: (state, action: PayloadAction<boolean>) => {

@@ -14,7 +14,7 @@ export const useToken = () => {
     const dispatch = useAppDispatch();
     dispatch(changeToken(token));
 
-    return token;
+    return useAppSelector((state) => state.token.value);
   }
 
   return token;
