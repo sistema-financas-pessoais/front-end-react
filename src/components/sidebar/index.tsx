@@ -51,6 +51,7 @@ export const Sidebar = () => {
                     key={dataNavigation.title}
                     icon={dataNavigation.icon}
                     title={dataNavigation.title}
+                    link={dataNavigation.link}
                   />
                 );
               } else if (

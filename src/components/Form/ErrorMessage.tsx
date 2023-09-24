@@ -1,7 +1,7 @@
-import { useFormContext } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form';
 
 interface ErrorMessageProps {
-  field: string
+  field: string;
 }
 
 function get(obj: Record<any, any>, path: string) {
@@ -9,23 +9,30 @@ function get(obj: Record<any, any>, path: string) {
     String.prototype.split
       .call(path, regexp)
       .filter(Boolean)
-      .reduce((res, key) => (res !== null && res !== undefined ? res[key] : res), obj);
+      .reduce(
+        (res, key) => (res !== null && res !== undefined ? res[key] : res),
+        obj,
+      );
 
   const result = travel(/[,[\]]+?/) || travel(/[,[\].]+?/);
-  
-  return result
-};
+
+  return result;
+}
 
 export function ErrorMessage({ field }: ErrorMessageProps) {
-  const { formState: { errors } } = useFormContext()
+  const {
+    formState: { errors },
+  } = useFormContext();
 
-  const fieldError = get(errors, field)
-    
+  const fieldError = get(errors, field);
+
   if (!fieldError) {
-    return null
+    return null;
   }
 
   return (
-    <span className="text-xs text-red-500 mt-1">{fieldError.message?.toString()}</span>
-  )
+    <span className="text-xs dark:text-red-500 text-red-600 font-semibold mt-1">
+      {fieldError.message?.toString()}
+    </span>
+  );
 }

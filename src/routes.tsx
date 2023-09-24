@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { DefaultPage } from './pages/DefaultPage';
 import { Login } from './pages/Login';
+import { useCurrentTheme } from './hooks/theme';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
 ]);
 
 const Routes = () => {
+  useCurrentTheme();
   return <RouterProvider router={router} />;
 };
 
