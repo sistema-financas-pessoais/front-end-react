@@ -1,6 +1,20 @@
+import { useAppDispatch } from '../../store/hooks';
+import { changeToken } from '../../store/reducers';
 import { useLocalStorage } from '../storage';
 
-export const useSetTokenOnLocalStorage = (token: string): void => {
-  const { set } = useLocalStorage();
-  set('accessToken', token);
-};
+interface UseSetTokenOnLocalStorageReturn {
+  setTokenOnLocalStorage: (token: string) => void;
+}
+
+export const useSetTokenOnLocalStorage =
+  (): UseSetTokenOnLocalStorageReturn => {
+    const { set } = useLocalStorage();
+    const dispatch = useAppDispatch();
+
+    return {
+      setTokenOnLocalStorage: (token: string) => {
+        set('accessToken', token);
+        dispatch(changeToken(token));
+      },
+    };
+  };

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/rules-of-hooks */
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { useToken } from '../../store/hooks';
+import { useLocalStorageToken } from '../../hooks/token';
 
 interface Api {
   get: <T = any, R = AxiosResponse<T, any>, D = any>(
@@ -29,10 +29,10 @@ interface Api {
   ) => Promise<R>;
 }
 
-const token = useToken();
+const token = useLocalStorageToken();
 const Authorization = token ? `Bearer ${token}` : null;
 export const axiosInstace = axios.create({
-  baseURL: '',
+  baseURL: 'http://localhost:3000',
   headers: {
     Authorization,
   },

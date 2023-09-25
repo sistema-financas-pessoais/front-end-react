@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -5,6 +6,14 @@ import { Form } from '../../components/Form';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { useState } from 'react';
+import { useMutation } from 'react-query';
+import { api } from '../../services/api';
+import { useSetTokenOnLocalStorage } from '../../hooks/token';
+import { useNavigate } from 'react-router-dom';
+import { useJwtDecode } from '../../hooks/auth/useJwtDecode';
+import { LoggedUser } from '../../@types/LoggedUser';
+import { changeLoggedUser } from '../../store/reducers';
+import { useAppDispatch } from '../../store/hooks';
 
 const createLoginSchema = z.object({
   email: z
@@ -35,10 +44,21 @@ const Login = () => {
   const createUserForm = useForm<CreateLoginData>({
     resolver: zodResolver(createLoginSchema),
   });
+  const { setTokenOnLocalStorage } = useSetTokenOnLocalStorage();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  async function onLogin(data: CreateLoginData) {
-    console.log(data);
-  }
+  const mutation = useMutation({
+    mutationFn: (data: CreateLoginData) => {
+      return api.post('sign-in', data).then((response) => response.data);
+    },
+    onSuccess: (res: { access_token: string }) => {
+      setTokenOnLocalStorage(res.access_token);
+      const loggedUser = useJwtDecode<LoggedUser | null>(res.access_token);
+      dispatch(changeLoggedUser(loggedUser));
+      navigate('/');
+    },
+  });
 
   const chengeShowPassword = () => {
     if (showPassword) {
@@ -69,7 +89,7 @@ const Login = () => {
       </div>
       <FormProvider {...createUserForm}>
         <form
-          onSubmit={handleSubmit(onLogin)}
+          onSubmit={handleSubmit((data) => mutation.mutate(data))}
           className="flex flex-col gap-4 w-full max-w-xs"
         >
           <Form.Field className="flex flex-col gap-1">

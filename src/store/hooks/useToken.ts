@@ -4,18 +4,18 @@ import { changeToken } from '../reducers';
 import { useAppDispatch, useAppSelector } from './index';
 
 export const useToken = () => {
-  let token = null;
+  const dispatch = useAppDispatch();
+  const selectedToken = useAppSelector((state) => state.token.value);
 
-  token = useAppSelector((state) => state.token.value);
-  if (token) return token;
+  if (selectedToken) return selectedToken;
 
-  token = useLocalStorageToken();
+  const token = useLocalStorageToken();
+
   if (token) {
-    const dispatch = useAppDispatch();
     dispatch(changeToken(token));
 
-    return useAppSelector((state) => state.token.value);
+    return selectedToken;
   }
 
-  return token;
+  return selectedToken;
 };
