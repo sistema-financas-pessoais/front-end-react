@@ -25,7 +25,15 @@ export const MenuItemTheme = () => {
   };
 
   return (
-    <MenuItem onClick={handleTheme} className="flex gap-2">
+    <MenuItem
+      title={
+        currentTheme === TypeThemeEnum.LIGHT
+          ? 'Mudar para tema Dark'
+          : 'Mudar para tema Light'
+      }
+      onClick={handleTheme}
+      className="flex gap-2"
+    >
       {currentTheme === TypeThemeEnum.LIGHT ? (
         <DarkModeOutlinedIcon className=" text-black rounded-full m-0 p-0" />
       ) : (

@@ -4,6 +4,7 @@ import Menu from '@mui/material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { MenuItemTheme } from './components/MenuItemTheme';
 import { MenuItemExit } from './components/MenuItemExit';
+import { MenuItemInfo } from './components/MenuItemInfo';
 
 export default function SettingsMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -38,8 +39,9 @@ export default function SettingsMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
+        <MenuItemInfo />
         <MenuItemTheme />
-        <MenuItemExit onClick={handleClose} />
+        <MenuItemExit title="log-out" onClick={handleClose} />
       </Menu>
     </div>
   );
