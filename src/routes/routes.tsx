@@ -3,6 +3,8 @@ import DefaultPage from '../pages/DefaultPage';
 import Login from '../pages/Login';
 import { ProtectedRoute } from './ProtectedRoute';
 import { NoLoggedRoute } from './NoLoggedRoute';
+import Users from '../pages/Users';
+import Home from '../pages/Home';
 
 const router = createBrowserRouter([
   {
@@ -12,6 +14,25 @@ const router = createBrowserRouter([
         <DefaultPage />
       </ProtectedRoute>
     ),
+    children: [
+      {
+        path: '/home',
+        index: true,
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/users',
+        element: (
+          <ProtectedRoute>
+            <Users />
+          </ProtectedRoute>
+        ),
+      },
+    ],
   },
   {
     path: '/login',

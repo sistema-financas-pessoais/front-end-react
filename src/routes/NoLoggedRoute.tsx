@@ -8,5 +8,5 @@ interface NoLoggedRouteProps {
 export const NoLoggedRoute = ({ children }: NoLoggedRouteProps) => {
   const loggedUser = useLoggedUser();
 
-  return !loggedUser ? children : <Navigate to={'/'} />;
+  return !loggedUser ? children : <Navigate to={'/home'} />;
 };
