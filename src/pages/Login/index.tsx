@@ -5,7 +5,6 @@ import { z } from 'zod';
 import { Form } from '../../components/Form';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { api } from '../../services/api';
 import { useSetTokenOnLocalStorage } from '../../hooks/token';
@@ -14,6 +13,7 @@ import { useJwtDecode } from '../../hooks/auth/useJwtDecode';
 import { LoggedUser } from '../../@types/LoggedUser';
 import { changeLoggedUser } from '../../store/reducers';
 import { useAppDispatch } from '../../store/hooks';
+import { useChangeShowPassword } from './hooks';
 
 const createLoginSchema = z.object({
   email: z
@@ -40,7 +40,8 @@ const createLoginSchema = z.object({
 type CreateLoginData = z.infer<typeof createLoginSchema>;
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const { showPassword, changeShowPassword } =
+    useChangeShowPassword('password');
   const createUserForm = useForm<CreateLoginData>({
     resolver: zodResolver(createLoginSchema),
   });
@@ -59,16 +60,6 @@ const Login = () => {
       navigate('/');
     },
   });
-
-  const chengeShowPassword = () => {
-    if (showPassword) {
-      document.querySelector('#password')?.setAttribute('type', 'password');
-    } else {
-      document.querySelector('#password')?.setAttribute('type', 'text');
-    }
-
-    setShowPassword((state) => !state);
-  };
 
   const {
     handleSubmit,
@@ -128,13 +119,13 @@ const Login = () => {
               />
               {showPassword ? (
                 <RemoveRedEyeIcon
-                  onClick={chengeShowPassword}
+                  onClick={changeShowPassword}
                   className="dark:text-black text-zinc-600 right-0 my-auto absolute mr-2"
                   fontSize="small"
                 />
               ) : (
                 <VisibilityOffIcon
-                  onClick={chengeShowPassword}
+                  onClick={changeShowPassword}
                   className="dark:text-black text-zinc-600 right-0 my-auto absolute mr-2"
                   fontSize="small"
                 />
