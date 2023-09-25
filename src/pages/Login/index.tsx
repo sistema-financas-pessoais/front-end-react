@@ -30,7 +30,7 @@ const createLoginSchema = z.object({
 
 type CreateLoginData = z.infer<typeof createLoginSchema>;
 
-export const Login = () => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const createUserForm = useForm<CreateLoginData>({
     resolver: zodResolver(createLoginSchema),
@@ -135,3 +135,5 @@ export const Login = () => {
     </main>
   );
 };
+
+export default Login;

@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from '../../components/Header';
-import { Sidebar } from '../../components/sidebar';
+import { Sidebar } from '../../components/Sidebar';
 
-export const DefaultPage = () => {
+const DefaultPage = () => {
   return (
     <>
       <Header />
@@ -13,3 +13,5 @@ export const DefaultPage = () => {
     </>
   );
 };
+
+export default DefaultPage;
