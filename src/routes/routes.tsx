@@ -1,12 +1,16 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { DefaultPage } from './pages/DefaultPage';
-import { Login } from './pages/Login';
-import { useCurrentTheme } from './hooks/theme';
+import { DefaultPage } from '../pages/DefaultPage';
+import { Login } from '../pages/Login';
+import { ProtectedRoute } from './ProtectedRoute';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <DefaultPage />,
+    element: (
+      <ProtectedRoute>
+        <DefaultPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/login',
@@ -15,7 +19,6 @@ const router = createBrowserRouter([
 ]);
 
 const Routes = () => {
-  useCurrentTheme();
   return <RouterProvider router={router} />;
 };
 
