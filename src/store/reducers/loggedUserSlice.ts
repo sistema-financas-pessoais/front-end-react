@@ -17,9 +17,12 @@ const loggedUserSlice = createSlice({
     changeLoggedUser: (state, action: PayloadAction<LoggedUser | null>) => {
       state.value = action.payload;
     },
+    clearLoggedUser: (state) => {
+      state.value = null;
+    },
   },
 });
 
-export const { changeLoggedUser } = loggedUserSlice.actions;
+export const { changeLoggedUser, clearLoggedUser } = loggedUserSlice.actions;
 
 export default loggedUserSlice.reducer;

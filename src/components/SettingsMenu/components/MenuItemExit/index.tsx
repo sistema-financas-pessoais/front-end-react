@@ -1,13 +1,20 @@
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem, { MenuItemTypeMap } from '@mui/material/MenuItem';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useLogout } from '../../../../hooks/auth';
+import { HTMLAttributes } from 'react';
 
-interface MenuItemExitProps {
-  onClick?: React.MouseEventHandler<HTMLLIElement> | undefined;
-}
+interface MenuItemExitProps
+  extends HTMLAttributes<HTMLLIElement & MenuItemTypeMap> {}
 
-export const MenuItemExit = ({ onClick }: MenuItemExitProps) => {
+export const MenuItemExit = (props: MenuItemExitProps) => {
+  const { logoutFn } = useLogout();
+
+  const logout = () => {
+    logoutFn();
+  };
+
   return (
-    <MenuItem onClick={onClick} className="flex gap-2">
+    <MenuItem {...props} onClick={logout} className="flex gap-2">
       <ExitToAppIcon className=" text-black rounded-full m-0 p-0" />
       Sair
     </MenuItem>
