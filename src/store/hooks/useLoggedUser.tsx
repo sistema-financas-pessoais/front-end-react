@@ -7,12 +7,13 @@ import { useAppDispatch, useAppSelector, useToken } from './index';
 export const useLoggedUser = () => {
   const dispatch = useAppDispatch();
   const selectedLoggedUser = useAppSelector((state) => state.loggedUser.value);
+  const { jwtDecode } = useJwtDecode<LoggedUser | ''>();
 
   if (selectedLoggedUser) {
     return selectedLoggedUser;
   }
 
-  const loggedUser = useJwtDecode<LoggedUser | ''>(useToken() || '');
+  const loggedUser = jwtDecode(useToken() || '');
   if (loggedUser) {
     dispatch(changeLoggedUser(loggedUser));
   }

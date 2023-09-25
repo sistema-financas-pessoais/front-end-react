@@ -5,15 +5,8 @@ import { z } from 'zod';
 import { Form } from '../../components/Form';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { useMutation } from 'react-query';
-import { api } from '../../services/api';
-import { useSetTokenOnLocalStorage } from '../../hooks/token';
-import { useNavigate } from 'react-router-dom';
-import { useJwtDecode } from '../../hooks/auth/useJwtDecode';
-import { LoggedUser } from '../../@types/LoggedUser';
-import { changeLoggedUser } from '../../store/reducers';
-import { useAppDispatch } from '../../store/hooks';
 import { useChangeShowPassword } from './hooks';
+import { useLogin } from './hooks/useLogin';
 
 const createLoginSchema = z.object({
   email: z
@@ -37,7 +30,7 @@ const createLoginSchema = z.object({
     }),
 });
 
-type CreateLoginData = z.infer<typeof createLoginSchema>;
+export type CreateLoginData = z.infer<typeof createLoginSchema>;
 
 const Login = () => {
   const { showPassword, changeShowPassword } =
@@ -45,32 +38,14 @@ const Login = () => {
   const createUserForm = useForm<CreateLoginData>({
     resolver: zodResolver(createLoginSchema),
   });
-  const { setTokenOnLocalStorage } = useSetTokenOnLocalStorage();
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  const mutation = useMutation({
-    mutationFn: (data: CreateLoginData) => {
-      return api.post('sign-in', data).then((response) => response.data);
-    },
-    onSuccess: (res: { access_token: string }) => {
-      setTokenOnLocalStorage(res.access_token);
-      const loggedUser = useJwtDecode<LoggedUser | null>(res.access_token);
-      dispatch(changeLoggedUser(loggedUser));
-      navigate('/');
-    },
-  });
-
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-    watch,
-  } = createUserForm;
+  const { isLoading, onLogin } = useLogin();
+  const { handleSubmit, watch } = createUserForm;
 
   const userPassword = watch('password');
   const isPasswordStrong = new RegExp(
     '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})',
   ).test(userPassword);
+
   return (
     <main className="dark:bg-slate-950 bg-neutral-100 max-w-[1280px] mx-auto p-8 h-screen flex flex-col gap-6 items-center justify-center">
       <div>
@@ -80,7 +55,7 @@ const Login = () => {
       </div>
       <FormProvider {...createUserForm}>
         <form
-          onSubmit={handleSubmit((data) => mutation.mutate(data))}
+          onSubmit={handleSubmit((data) => onLogin(data))}
           className="flex flex-col gap-4 w-full max-w-xs"
         >
           <Form.Field className="flex flex-col gap-1">
@@ -136,7 +111,7 @@ const Login = () => {
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isLoading}
             className="bg-violet-500 text-white rounded px-3 h-10 font-semibold text-sm hover:bg-violet-600"
           >
             Salvar

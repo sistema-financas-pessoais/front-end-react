@@ -1,15 +1,23 @@
 import jwt_decode from 'jwt-decode';
 
-export const useJwtDecode = <T>(token: string | null): T | null => {
-  if (!token) return null;
+interface UseJwtDecodeReturn<T> {
+  jwtDecode: (token: string | null) => T | null;
+}
 
-  let result: T | null = null;
+export const useJwtDecode = <T>(): UseJwtDecodeReturn<T> => {
+  return {
+    jwtDecode: (token: string | null): T | null => {
+      if (!token) return null;
 
-  try {
-    result = jwt_decode(token) as T | null;
+      let result: T | null = null;
 
-    return result;
-  } catch {
-    return null;
-  }
+      try {
+        result = jwt_decode(token) as T | null;
+
+        return result;
+      } catch {
+        return null;
+      }
+    },
+  };
 };
