@@ -1,5 +1,5 @@
 interface AuthWapperProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   condition: boolean;
 }
 

@@ -43,7 +43,7 @@ export const Sidebar = () => {
         onClose={() => toggleDrawer(null, false)}
       >
         <Box
-          className="flex flex-col flex-1 h-full justify-between dark:bg-slate-950 bg-neutral-100 dark:text-white text-black dark:border-slate-100 dark:border-1"
+          className="flex flex-col flex-1 h-full justify-between dark:bg-slate-900 bg-neutral-200 dark:text-white text-black dark:border-slate-100 dark:border-1"
           sx={{ minWidth: 250 }}
           role="presentation"
         >

@@ -1,7 +1,6 @@
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import { Link } from 'react-router-dom';
 import { AuthWapper } from '../../../AuthWapper';
 
@@ -29,8 +28,10 @@ export const ListNavigationItem = ({
       <Link to={link}>
         <ListItem onClick={onClick} disablePadding className={className}>
           <ListItemButton sx={isChild ? { pl: 4 } : {}}>
-            <ListItemIcon className="dark:text-white">{icon}</ListItemIcon>
-            <ListItemText primary={title} />
+            <ListItemIcon className="dark:text-white p-0 m-0">
+              {icon}
+            </ListItemIcon>
+            <p className="p-0 m-0 text-xs font-semibold self-center">{title}</p>
           </ListItemButton>
         </ListItem>
       </Link>

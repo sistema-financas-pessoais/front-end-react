@@ -39,7 +39,9 @@ export const MenuItemTheme = () => {
       ) : (
         <LightModeOutlinedIcon className=" text-black rounded-full m-0 p-0" />
       )}
-      {currentTheme === TypeThemeEnum.LIGHT ? 'Dark' : 'Light'}
+      <p className="text-black m-0 p-0 text-xs">
+        {currentTheme === TypeThemeEnum.LIGHT ? 'Dark' : 'Light'}
+      </p>
     </MenuItem>
   );
 };

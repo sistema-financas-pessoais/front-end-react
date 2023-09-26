@@ -15,8 +15,8 @@ export const MenuItemExit = (props: MenuItemExitProps) => {
 
   return (
     <MenuItem {...props} onClick={logout} className="flex gap-2">
-      <ExitToAppIcon className=" text-black rounded-full m-0 p-0" />
-      Sair
+      <ExitToAppIcon className="text-black rounded-full m-0 p-0" />
+      <p className="text-black m-0 p-0 text-xs">Sair</p>
     </MenuItem>
   );
 };
