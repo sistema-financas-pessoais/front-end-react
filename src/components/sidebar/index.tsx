@@ -7,11 +7,16 @@ import { ListNavigationItem } from './components/ListNavigationItem';
 import { ListCollapsebleItem } from './components/ListCollapsebleItem';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import { changeToggleSidebar } from '../../store/reducers';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import {
+  useAppSelector,
+  useAppDispatch,
+  useLoggedUser,
+} from '../../store/hooks';
 
 export const Sidebar = () => {
   const toggleSidebar = useAppSelector((state) => state?.toggleSidebar);
   const dispatch = useAppDispatch();
+  const loggedUser = useLoggedUser();
 
   const toggleDrawer = (
     event: React.KeyboardEvent | React.MouseEvent | null,
@@ -52,6 +57,9 @@ export const Sidebar = () => {
                     icon={dataNavigation.icon}
                     title={dataNavigation.title}
                     link={dataNavigation.link}
+                    conditionToShow={
+                      dataNavigation.onlyAdmin ? loggedUser?.isAdmin : true
+                    }
                   />
                 );
               } else if (
@@ -63,6 +71,9 @@ export const Sidebar = () => {
                     icon={dataNavigation.icon}
                     title={dataNavigation.title}
                     children={dataNavigation.children}
+                    conditionToShow={
+                      dataNavigation.onlyAdmin ? loggedUser?.isAdmin : true
+                    }
                   />
                 );
               }
