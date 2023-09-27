@@ -9,12 +9,20 @@ export const TableUsers = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { data, isLoading, isSuccess, refetch } = useUsersQuery({
-    page,
+    page: page + 1,
     perPage: rowsPerPage,
     selectFields: 'id,name,email,isAdmin',
   });
   const { isLoading: isDeletingLoading, onDeleteUser } = useDeleteUser({
-    onSuccessFn: refetch,
+    onSuccessFn: () => {
+      if (!data?.items || data?.items?.length <= 1) {
+        setPage(() => 0);
+
+        return;
+      }
+
+      refetch();
+    },
   });
 
   useEffect(() => {
@@ -43,7 +51,10 @@ export const TableUsers = () => {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hiden' }} className="w-full rounded">
+    <Paper
+      sx={{ width: '100%', overflow: 'hidden' }}
+      className="w-full rounded"
+    >
       <div className="w-full overflow-auto max-h-[470px] relative min-w-[1000px] rounded">
         <table className="w-full relative rounded-b">
           <thead className="sticky top-0">

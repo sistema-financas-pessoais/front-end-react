@@ -35,11 +35,11 @@ export type CreateLoginData = z.infer<typeof createLoginSchema>;
 const Login = () => {
   const { showPassword, changeShowPassword } =
     useChangeShowPassword('password');
-  const createUserForm = useForm<CreateLoginData>({
+  const loginForm = useForm<CreateLoginData>({
     resolver: zodResolver(createLoginSchema),
   });
   const { isLoading, onLogin } = useLogin();
-  const { handleSubmit, watch } = createUserForm;
+  const { handleSubmit, watch } = loginForm;
 
   const userPassword = watch('password');
   const isPasswordStrong = new RegExp(
@@ -53,7 +53,7 @@ const Login = () => {
           Login
         </h1>
       </div>
-      <FormProvider {...createUserForm}>
+      <FormProvider {...loginForm}>
         <form
           onSubmit={handleSubmit((data) => onLogin(data))}
           className="flex flex-col gap-4 w-full max-w-xs"

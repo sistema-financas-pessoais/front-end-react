@@ -5,6 +5,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { NoLoggedRoute } from './NoLoggedRoute';
 import UsersList from '../pages/UsersList';
 import Home from '../pages/Home';
+import { UserForm } from '../pages/UserForm';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <UsersList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/users/new',
+        element: (
+          <ProtectedRoute>
+            <UserForm />
           </ProtectedRoute>
         ),
       },
