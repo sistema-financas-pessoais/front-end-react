@@ -7,7 +7,7 @@ const DefaultPage = () => {
     <>
       <Header />
       <Sidebar />
-      <main className="dark:bg-slate-950 bg-neutral-100 max-w-[1280px] mx-auto px-8 pt-2 h-full">
+      <main className="dark:bg-slate-950 bg-neutral-100 max-w-[1280px] mx-auto xl:px-0 px-6 pt-2 h-full">
         <Outlet />
       </main>
     </>

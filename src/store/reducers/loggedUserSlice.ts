@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { LoggedUser } from '../../@types/LoggedUser';
+import { LoggedUser } from '../../@types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface LoggedUserState {

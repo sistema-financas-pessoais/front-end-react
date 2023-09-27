@@ -1,7 +1,7 @@
 import { useMutation } from 'react-query';
 import { CreateLoginData } from '../index';
-import { api } from '../../../services/api';
-import { LoggedUser } from '../../../@types/LoggedUser';
+import { api } from '../../../config/api';
+import { LoggedUser } from '../../../@types';
 import { useSetTokenOnLocalStorage } from '../../../hooks/token';
 import { useJwtDecode } from '../../../hooks/auth/useJwtDecode';
 import { changeLoggedUser } from '../../../store/reducers';

@@ -1,4 +1,4 @@
-import { LoggedUser } from '../../@types/LoggedUser';
+import { LoggedUser } from '../../@types';
 import { useJwtDecode } from '../../hooks/auth/useJwtDecode';
 import { changeLoggedUser } from '../reducers';
 import { useAppDispatch, useAppSelector, useToken } from './index';
