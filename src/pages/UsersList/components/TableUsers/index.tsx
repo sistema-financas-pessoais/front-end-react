@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import { SkeletonUsersList } from '../Skeleton';
-import { useUsersQuery } from '../../../../hooks/fetchQueries';
+import { useDeleteUser, useUsersQuery } from '../../../../hooks/fetchQueries';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const TableUsers = () => {
   const [page, setPage] = useState(0);
@@ -11,6 +12,9 @@ export const TableUsers = () => {
     page,
     perPage: rowsPerPage,
     selectFields: 'id,name,email,isAdmin',
+  });
+  const { isLoading: isDeletingLoading, onDeleteUser } = useDeleteUser({
+    onSuccessFn: refetch,
   });
 
   useEffect(() => {
@@ -71,7 +75,12 @@ export const TableUsers = () => {
                   </td>
 
                   <td className="w-2/12 text-center py-2">
-                    <div className="w-full flex gap-2 justify-center"></div>
+                    <div className="w-full flex justify-center">
+                      <DeleteIcon
+                        className="dark:text-white"
+                        onClick={() => onDeleteUser(item?.id || '')}
+                      />
+                    </div>
                   </td>
                 </tr>
               );
