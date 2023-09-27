@@ -1,5 +1,7 @@
-import MailIcon from '@mui/icons-material/Mail';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import HomeIcon from '@mui/icons-material/Home';
+import ListIcon from '@mui/icons-material/List';
+import PeopleIcon from '@mui/icons-material/People';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 export enum TypeDataNavigation {
   DEFAULT = 'default',
@@ -20,28 +22,28 @@ export const principalDataNavigation: ListItemProp[] = [
   {
     link: 'home',
     title: 'Home',
-    icon: <InboxIcon />,
+    icon: <HomeIcon />,
     onlyAdmin: false,
     type: TypeDataNavigation.DEFAULT,
   },
   {
     link: 'users',
     title: 'Usuários',
-    icon: <MailIcon />,
+    icon: <PeopleIcon />,
     onlyAdmin: true,
     type: TypeDataNavigation.COLLAPSEBLE,
     children: [
       {
         link: 'users',
         title: 'Lista de Usuários',
-        icon: <InboxIcon />,
+        icon: <ListIcon />,
         onlyAdmin: true,
         type: TypeDataNavigation.DEFAULT,
       },
       {
         link: 'users/new',
-        title: 'Cadsatro de Usuários',
-        icon: <MailIcon />,
+        title: 'Cadastro de Usuários',
+        icon: <PersonAddIcon />,
         onlyAdmin: true,
         type: TypeDataNavigation.DEFAULT,
       },

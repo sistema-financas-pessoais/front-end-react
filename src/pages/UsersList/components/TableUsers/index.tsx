@@ -490,6 +490,7 @@ export const TableUsers = () => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage="Linhas por página"
         />
       </div>
     </Paper>

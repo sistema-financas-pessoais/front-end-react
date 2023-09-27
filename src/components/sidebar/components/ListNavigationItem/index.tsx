@@ -27,7 +27,7 @@ export const ListNavigationItem = ({
     <AuthWapper condition={conditionToShow}>
       <Link to={link}>
         <ListItem onClick={onClick} disablePadding className={className}>
-          <ListItemButton sx={isChild ? { pl: 4 } : {}}>
+          <ListItemButton sx={isChild ? { pl: 3 } : {}}>
             <ListItemIcon className="dark:text-white p-0 m-0">
               {icon}
             </ListItemIcon>
