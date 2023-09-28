@@ -6,6 +6,7 @@ import { NoLoggedRoute } from './NoLoggedRoute';
 import UsersList from '../pages/UsersList';
 import Home from '../pages/Home';
 import { UserForm } from '../pages/UserForm';
+import { OnlyAdminRoute } from './OnlyAdminRoute';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,9 @@ const router = createBrowserRouter([
         path: '/users',
         element: (
           <ProtectedRoute>
-            <UsersList />
+            <OnlyAdminRoute>
+              <UsersList />
+            </OnlyAdminRoute>
           </ProtectedRoute>
         ),
       },
@@ -37,7 +40,9 @@ const router = createBrowserRouter([
         path: '/users/new',
         element: (
           <ProtectedRoute>
-            <UserForm />
+            <OnlyAdminRoute>
+              <UserForm />
+            </OnlyAdminRoute>
           </ProtectedRoute>
         ),
       },

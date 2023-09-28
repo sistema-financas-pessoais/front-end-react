@@ -8,5 +8,5 @@ interface ProtectedRouteProps {
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const loggedUser = useLoggedUser();
 
-  return loggedUser ? children : <Navigate to={'login'} />;
+  return loggedUser ? children : <Navigate to={'/login'} />;
 };
