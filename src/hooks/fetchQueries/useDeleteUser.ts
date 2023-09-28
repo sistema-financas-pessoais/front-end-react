@@ -1,11 +1,12 @@
 import { useMutation } from 'react-query';
-import { api } from '../../config/api';
+import { api } from '../../services/api';
 
 export const useDeleteUser = (data: {
   onSuccessFn?: () => unknown;
   onErrorFn?: () => unknown;
 }) => {
   const mutation = useMutation({
+    mutationKey: ['listUsers'],
     mutationFn: (userId: string) => {
       return api.delete(`users/${userId}`).then((response) => response.data);
     },

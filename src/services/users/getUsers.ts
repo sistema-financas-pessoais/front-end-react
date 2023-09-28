@@ -1,4 +1,4 @@
-import { api } from '../../config/api';
+import { api } from '../api';
 import { creteSearchParams } from '../../utils';
 import { SearchQueryParams, SearchResultProps, UserEntity } from '../../@types';
 

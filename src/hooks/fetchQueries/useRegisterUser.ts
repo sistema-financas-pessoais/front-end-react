@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from 'react-query';
-import { api } from '../../config/api';
+import { api } from '../../services/api';
 import { CreateUserData } from '../../pages/UserForm';
 import { AxiosError } from 'axios';
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import { SkeletonUsersList } from '../Skeleton';
@@ -16,7 +16,7 @@ export const TableUsers = () => {
   const { isLoading: isDeletingLoading, onDeleteUser } = useDeleteUser({
     onSuccessFn: () => {
       if (!data?.items || data?.items?.length <= 1) {
-        setPage(() => 0);
+        setPage((currentPage) => (currentPage === 0 ? 0 : currentPage - 1));
 
         return;
       }
@@ -25,16 +25,11 @@ export const TableUsers = () => {
     },
   });
 
-  useEffect(() => {
-    refetch();
-  }, [page, refetch, rowsPerPage]);
-
   if (isLoading) {
     return <SkeletonUsersList />;
   }
 
   if (!isSuccess) {
-    console.log(data);
     setPage(data?.currentPage || 0);
     setRowsPerPage(data?.perPage || 5);
   }
@@ -50,7 +45,7 @@ export const TableUsers = () => {
     setPage(() => 0);
   };
 
-  return (
+  return data?.items && data?.items?.length > 0 ? (
     <Paper
       sx={{ width: '100%', overflow: 'hidden' }}
       className="w-full rounded"
@@ -88,7 +83,7 @@ export const TableUsers = () => {
                   <td className="w-2/12 text-center py-2">
                     <div className="w-full flex justify-center">
                       <DeleteIcon
-                        className="dark:text-white"
+                        className="cursor-pointer dark:text-white dark:hover:text-slate-200 text-slate-600 rounded hover:text-slate-500"
                         onClick={() => onDeleteUser(item?.id || '')}
                       />
                     </div>
@@ -112,5 +107,11 @@ export const TableUsers = () => {
         />
       </div>
     </Paper>
+  ) : (
+    <div className="flex justify-center items-center w-full h-full">
+      <h1 className="dark:text-white text-black font-bold text-xl">
+        Não há dados
+      </h1>
+    </div>
   );
 };
