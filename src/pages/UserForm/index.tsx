@@ -74,7 +74,7 @@ export const UserForm = () => {
               <Form.Input
                 type="email"
                 name="email"
-                className="flex-1 rounded border border-slate-700 shadow-sm px-3 py-2 text-zinc-800 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="rounded border border-slate-700 shadow-sm px-3 py-2 text-zinc-800 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <Form.ErrorMessage field="email" />
             </Form.Field>
@@ -89,7 +89,7 @@ export const UserForm = () => {
               <Form.Input
                 type="text"
                 name="name"
-                className="flex-1 rounded border border-slate-700 shadow-sm px-3 py-2 text-zinc-800 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="rounded border border-slate-700 shadow-sm px-3 py-2 text-zinc-800 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <Form.ErrorMessage field="name" />
             </Form.Field>
