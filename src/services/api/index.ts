@@ -32,7 +32,7 @@ interface Api {
 const token = useLocalStorageToken();
 const Authorization = token ? `Bearer ${token}` : null;
 export const axiosInstace = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3001',
   headers: {
     Authorization,
   },
